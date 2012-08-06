@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require 'ruby-debug'
+require 'optparse'
+
+require File.dirname(__FILE__) + '/../lib/shift_subtitles'
+
+options = {}
+
+optparse = OptionParser.new do |opts|
+  options[:action] = nil
+  opts.on('--action OPERATION') { |action| options[:action] = action }
+
+  options[:time] = nil
+  opts.on('--time TIME') { |time| options[:time] = time }
+
+  options[:input] = nil
+  opts.on('--input INPUT') { |input| options[:input] = input }
+
+  options[:output] = nil
+  opts.on('--output OUTPUT') { |output| options[:output] = output }
+end
+
+optparse.parse!
+
+begin
+  ShiftSubtitles::Process.shift_subtitles(options)
+rescue => e
+  puts "OOPS! something went wrong......#{e.message}"
+else
+  puts 'Shift Subtitle successfully run. Welcome to AV heaven'  
+end

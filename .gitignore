@@ -1,0 +1,5 @@
+Gemfile.lock
+tmp/aruba/*
+*.gem
+bin/*.srt
+*.srt
